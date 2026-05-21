@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUVEA — Luxury Beauty & Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f4ece1;
+    --warm-beige: #e5d4c0;
+    --terracotta: #bd845b;
+    --brown: #7c5335;
+    --dark-brown: #2d1f16;
+    --gold: #c29e60;
+    --white: #fdfbf9;
+    --text-dark: #261c14;
+    --text-mid: #6e5442;
+    --text-light: #a89280;
+    --blush: #e1b7a1;
+    --sage: #abae9b;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .announce {
+    background: var(--dark-brown);
+    color: var(--warm-beige);
+    text-align: center;
+    padding: 12px;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px;
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(229, 212, 192, 0.5);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 6px;
+    color: var(--dark-brown);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-actions {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .nav-actions svg {
+    width: 18px; height: 18px;
+    stroke: var(--text-dark);
+    fill: none;
+    stroke-width: 1.2;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav-actions svg:hover, .nav-actions svg.active { stroke: var(--terracotta); }
+  .nav-actions svg.has-items { fill: rgba(189, 132, 91, 0.15); }
+
+  .icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge-count {
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    background: var(--terracotta);
+    color: white;
+    font-size: 9px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .btn-nav {
+    background: var(--dark-brown);
+    color: var(--white);
+    border: none;
+    padding: 10px 26px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    font-weight: 400;
+  }
+  .btn-nav:hover { background: var(--terracotta); }
+
+  /* Search Container */
+  .search-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 20px 60px;
+    border-bottom: 1px solid var(--warm-beige);
+    display: none;
+    align-items: center;
+    gap: 15px;
+    z-index: 99;
+    box-shadow: 0 10px 30px rgba(45,31,22,0.05);
+  }
+  .search-container.open { display: flex; }
+  .search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    color: var(--dark-brown);
+    outline: none;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 85vh;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    background: var(--white);
+    position: relative;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 5.5vw, 76px);
+    line-height: 1.1;
+    font-weight: 300;
+    color: var(--dark-brown);
+    margin-bottom: 28px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--terracotta);
+  }
+
+  .hero-desc {
+    color: var(--text-mid);
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 440px;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--dark-brown);
+    color: var(--white);
+    border: none;
+    padding: 16px 38px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 400;
+  }
+  .btn-primary:hover { background: var(--terracotta); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--dark-brown);
+    border: 1px solid var(--dark-brown);
+    padding: 16px 38px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 400;
+  }
+  .btn-outline:hover { background: var(--dark-brown); color: var(--white); }
+
+  .hero-stats {
+    display: flex;
+    gap: 50px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(229, 212, 192, 0.6);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--dark-brown);
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .hero-visual {
+    position: relative;
+    background: var(--warm-beige);
+    overflow: hidden;
+  }
+
+  .hero-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.96) sepia(6%) saturate(95%);
+    transition: transform 1.2s ease;
+  }
+  .hero-visual:hover img { transform: scale(1.03); }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 40px; left: 40px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(45, 31, 22, 0.9);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
+  }
+
+  .hero-badge span:first-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  .hero-badge span:last-child {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+
+  /* ── SALE BANNER ── */
+  .sale-banner {
+    background: var(--terracotta);
+    color: var(--white);
+    text-align: center;
+    padding: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+  .sale-banner strong { font-weight: 500; }
+
+  /* ── BENEFITS BAR ── */
+  .benefits-bar {
+    background: var(--white);
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 60px;
+    border-bottom: 1px solid rgba(229, 212, 192, 0.4);
+  }
+
+  .benefit { display: flex; align-items: flex-start; gap: 16px; max-width: 240px; }
+
+  .benefit-icon-container {
+    color: var(--terracotta);
+    font-size: 14px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .benefit-title { font-weight: 500; color: var(--dark-brown); margin-bottom: 5px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .benefit-sub { font-size: 12.5px; color: var(--text-mid); line-height: 1.5; font-weight: 300; }
+
+  /* ── CATEGORIES & SECTIONS ── */
+  .section { padding: 120px 60px; }
+  .bestsellers-bg { background: var(--white); }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    border-bottom: 1px solid rgba(229, 212, 192, 0.3);
+    padding-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.5vw, 48px);
+    font-weight: 300;
+    color: var(--dark-brown);
+    line-height: 1.15;
+    margin-top: 6px;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .cat-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 3/4;
+    background-color: var(--warm-beige);
+  }
+
+  .cat-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: brightness(0.95) sepia(4%);
+  }
+
+  .cat-card:hover img { transform: scale(1.05); }
+
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(38,28,20,0.8) 0%, rgba(38,28,20,0.2) 40%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+  }
+
+  .cat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  .cat-count {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--blush);
+    text-transform: uppercase;
+  }
+
+  /* ── PRODUCTS GRID ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 24px;
+  }
+
+  .product-card {
+    background: transparent;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .product-img {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    position: relative;
+    background: var(--cream);
+  }
+
+  .product-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .product-card:hover .product-img img { transform: scale(1.04); }
+
+  .badge-sold, .badge-sale {
+    position: absolute;
+    top: 15px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    font-weight: 500;
+    z-index: 5;
+  }
+  .badge-sold { left: 15px; background: var(--dark-brown); color: var(--cream); }
+  .badge-sale { right: 15px; background: var(--terracotta); color: white; }
+
+  .btn-fav-item {
+    position: absolute;
+    top: 15px; right: 15px;
+    background: rgba(253, 251, 249, 0.9);
+    backdrop-filter: blur(4px);
+    border: none;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 6;
+    transition: all 0.2s;
+  }
+  /* Menggeser tombol favorit ke kiri jika ada badge sale agar tidak bertumpuk */
+  .product-card:has(.badge-sale) .btn-fav-item { right: 75px; }
+
+  .btn-fav-item:hover { transform: scale(1.08); background: var(--white); }
+  .btn-fav-item svg { width: 14px; height: 14px; fill: none; stroke: var(--text-dark); stroke-width: 1.5; transition: all 0.2s; }
+  .btn-fav-item.active svg { fill: #c95b5b; stroke: #c95b5b; }
+
+  .product-quick {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(45, 31, 22, 0.95);
+    color: var(--white);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 15px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    z-index: 7;
+  }
+  .product-card:hover .product-quick { opacity: 1; transform: translateY(0); }
+
+  .product-info { padding: 18px 0 0 0; }
+  .product-stars { display: flex; gap: 2px; margin-bottom: 8px; color: var(--gold); font-size: 11px; }
+  .product-brand { font-size: 10px; color: var(--text-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--dark-brown);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .product-price { display: flex; align-items: center; gap: 12px; }
+  .price-now { font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-dark); }
+  .price-was { font-size: 13px; color: var(--text-light); text-decoration: line-through; font-weight: 300; }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 550px;
+    background: var(--dark-brown);
+  }
+  .about-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: sepia(8%) brightness(0.9); }
+
+  .about-content { display: flex; flex-direction: column; justify-content: center; padding: 80px; color: var(--cream); }
+  .about-content p { color: #d9c4b3; font-size: 15px; line-height: 1.8; font-weight: 300; margin: 24px 0 40px; max-width: 460px; }
+  .about-features { display: flex; flex-direction: column; gap: 20px; }
+  .about-feat { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--cream); letter-spacing: 0.5px; font-weight: 300; }
+  .about-feat-icon { width: 36px; height: 36px; border: 1px solid rgba(194,158,96,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 13px; }
+
+  /* ── FEATURED PRODUCTS WIDE ── */
+  .featured-wide { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-top: 20px; }
+  .feat-main { position: relative; overflow: hidden; cursor: pointer; min-height: 440px; background-color: var(--warm-beige); }
+  .feat-main img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; filter: brightness(0.9); }
+  .feat-main:hover img { transform: scale(1.03); }
+  
+  .feat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(38,28,20,0.7) 0%, transparent 70%);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  .feat-label { font-size: 9px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
+  .feat-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--white); font-weight: 300; line-height: 1.2; margin-bottom: 24px; }
+  
+  .feat-link {
+    display: inline-block;
+    background: var(--white);
+    color: var(--dark-brown);
+    padding: 14px 32px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  .feat-link:hover { background: var(--terracotta); color: var(--white); }
+
+  .feat-side { display: flex; flex-direction: column; gap: 24px; }
+  .feat-small { position: relative; overflow: hidden; flex: 1; cursor: pointer; min-height: 208px; background-color: var(--warm-beige); }
+  .feat-small img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s; filter: brightness(0.9); }
+  .feat-small:hover img { transform: scale(1.04); }
+  .feat-small .feat-overlay { padding: 30px; background: linear-gradient(to top, rgba(38,28,20,0.6) 0%, transparent 100%); }
+  .feat-small .feat-title { font-size: 22px; margin-bottom: 0; }
+
+  /* ── TAGS SYSTEM ── */
+  .tags-section { padding: 40px 60px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; }
+  .tag-label { font-size: 11px; color: var(--text-light); letter-spacing: 2px; text-transform: uppercase; margin-right: 12px; font-weight: 500; }
+  
+  .tag {
+    background: transparent;
+    border: 1px solid rgba(189, 132, 91, 0.3);
+    color: var(--text-mid);
+    padding: 8px 22px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 400;
+  }
+  .tag.active, .tag:hover { border-color: var(--terracotta); background: var(--terracotta); color: var(--white); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-bg { background: var(--warm-beige); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testi-card { background: var(--white); padding: 44px 40px; position: relative; box-shadow: 0 4px 20px rgba(45,31,22,0.02); }
+  .testi-card::before { content: '“'; position: absolute; top: 15px; left: 25px; font-family: 'Cormorant Garamond', serif; font-size: 90px; color: #eedcc6; line-height: 1; }
+  .testi-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.7; color: var(--text-mid); font-style: italic; margin-top: 20px; font-weight: 400; }
+  .testi-author { margin-top: 28px; display: flex; align-items: center; gap: 14px; }
+  .testi-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; filter: sepia(4%); }
+  .testi-name { font-size: 12px; font-weight: 500; color: var(--text-dark); letter-spacing: 0.5px; }
+  .testi-role { font-size: 10px; color: var(--text-light); margin-top: 3px; letter-spacing: 0.5px; }
+
+  /* ── NEWSLETTER ── */
+  .newsletter { display: grid; grid-template-columns: 1fr 1fr; min-height: 380px; overflow: hidden; }
+  .newsletter-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; filter: brightness(0.85) sepia(10%); }
+  .newsletter-content { display: flex; flex-direction: column; justify-content: center; padding: 60px 80px; color: var(--cream); }
+  .newsletter-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; margin-bottom: 16px; color: var(--white); }
+  .newsletter-content p { color: #c4b0a1; font-size: 14px; line-height: 1.7; font-weight: 300; margin-bottom: 32px; max-width: 400px; }
+  .newsletter-form { display: flex; }
+  
+  .newsletter-form input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-right: none;
+    color: var(--white);
+    padding: 16px 20px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    outline: none;
+    letter-spacing: 0.5px;
+  }
+  .newsletter-form input::placeholder { color: rgba(244,236,225,0.35); }
+  
+  .newsletter-form button {
+    background: var(--terracotta);
+    color: var(--white);
+    border: none;
+    padding: 16px 32px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .newsletter-form button:hover { background: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer { background: #1f1711; color: #c0b3a9; padding: 80px 60px 40px; font-size: 14px; }
+  .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+  .footer-brand .nav-logo { color: var(--white); display: block; margin-bottom: 20px; }
+  .footer-brand p { font-size: 13.5px; line-height: 1.8; color: #a39489; font-weight: 300; max-width: 300px; }
+  .footer-social { display: flex; gap: 14px; margin-top: 28px; }
+  
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(244,236,225,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c0b3a9;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .social-btn:hover { background: var(--terracotta); border-color: var(--terracotta); color: var(--white); }
+
+  .footer-col h4 { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--white); margin-bottom: 24px; font-weight: 500; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .footer-col ul a { color: #a39489; text-decoration: none; font-size: 13px; font-weight: 300; transition: color 0.3s; cursor: pointer; letter-spacing: 0.3px; }
+  .footer-col ul a:hover { color: var(--terracotta); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(244,236,225,0.08);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #85786f;
+    font-weight: 300;
+  }
+
+  /* ── MODAL STRUCTURE ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 23, 17, 0.5);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    width: 90%;
+    max-width: 920px;
+    max-height: 85vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(31,23,17,0.15);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 24px; right: 24px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-mid);
+    z-index: 12;
+    font-weight: 200;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--terracotta); }
+
+  .modal-left { background: #f6f0e7; padding: 50px; border-right: 1px solid rgba(229,212,192,0.4); }
+  .modal-right { padding: 50px; }
+  .modal h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--dark-brown); margin-bottom: 32px; letter-spacing: 0.5px; }
+
+  .cart-container { max-height: 320px; overflow-y: auto; padding-right: 10px; }
+  .cart-empty-msg { color: var(--text-light); font-style: italic; padding: 40px 0; text-align: center; font-weight: 300; font-size: 14px; }
+  .cart-item { display: flex; gap: 20px; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(229,212,192,0.5); }
+  .cart-item img { width: 64px; height: 64px; object-fit: cover; background-color: var(--cream); }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--dark-brown); margin-bottom: 4px; font-weight: 400; }
+  .cart-item-price { font-size: 13.5px; color: var(--terracotta); font-weight: 400; }
+  
+  .btn-remove-item {
+    background: none; border: none;
+    color: var(--text-light);
+    cursor: pointer; font-size: 14px;
+    padding: 6px; transition: color 0.2s;
+  }
+  .btn-remove-item:hover { color: var(--terracotta); }
+
+  .modal-total {
+    margin-top: 30px;
+    padding: 22px;
+    background: var(--dark-brown);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .form-group { margin-bottom: 20px; }
+  .form-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-mid); display: block; margin-bottom: 8px; font-weight: 500; }
+  
+  .form-input {
+    width: 100%;
+    border: 1px solid var(--warm-beige);
+    background: transparent;
+    padding: 13px 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13.5px;
+    color: var(--dark-brown);
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .form-input:focus { border-color: var(--terracotta); background-color: var(--white); }
+
+  .checkout-btn {
+    width: 100%;
+    background: var(--terracotta);
+    color: var(--white);
+    border: none;
+    padding: 18px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s;
+    font-weight: 500;
+  }
+  .checkout-btn:hover { background: var(--dark-brown); }
+
+  /* UI Utilities */
+  .view-all-btn { background: none; border: none; font-family: inherit; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav, .section { padding-left: 30px; padding-right: 30px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { height: 420px; }
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
+    .about-strip, .newsletter { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .benefits-bar { flex-wrap: wrap; gap: 30px; padding: 40px 30px; justify-content: flex-start; }
+    .testi-grid { grid-template-columns: 1fr; gap: 24px; }
+    .modal { grid-template-columns: 1fr; }
+    .modal-left, .modal-right { padding: 40px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="announce" id="home">🗦 Gratis Ongkir Seluruh Indonesia min. Rp200.000 🗧 Gunakan Kode: BEAUTY20</div>
+
+<nav>
+  <a href="#home" class="nav-logo">NUVEA</a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about-section">About</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#blog-newsletter">Mailing List</a></li>
+  </ul>
+  <div class="nav-actions">
+    <svg viewBox="0 0 24 24" id="search-trigger"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    
+    <div class="icon-wrapper" id="fav-trigger" style="cursor:pointer;">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="badge-count" id="fav-count" style="display:none;">0</span>
+    </div>
+
+    <div class="icon-wrapper" id="cart-trigger" style="cursor:pointer;">
+      <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="badge-count" id="cart-count">0</span>
+    </div>
+
+    <button class="btn-nav" id="checkout-nav-btn">Bag</button>
+  </div>
+
+  <div class="search-container" id="search-box">
+    <input type="text" class="search-input" id="search-input-field" placeholder="Cari produk kecantikan esensial atau kategori Anda...">
+    <span style="cursor:pointer; color:var(--text-light); font-size: 14px;" id="search-close">✕</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-tag">✦ Modern Botanical Ritual</p>
+    <h1 class="hero-title">Kecantikan yang<br><em>Murni & Abadi</em></h1>
+    <p class="hero-desc">Menghadirkan ritual perawatan kurasi tingkat tinggi dengan formula botani aktif pilihan dari penjuru alam, teruji klinis merawat binar sejati kulit Anda.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Belanja Sekarang</button>
+      <button class="btn-outline" onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth'})">Kisah Kami</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">50K𐎽</div><div class="stat-label">Pelanggan Setia</div></div>
+      <div><div class="stat-num">98%</div><div class="stat-label">Rating Kepuasan</div></div>
+      <div><div class="stat-num">16</div><div class="stat-label">Formulasi Utama</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1000&q=80" alt="Nuvea Editorial Cosmetics Visual" onerror="handleImageError(this)">
+    <div class="hero-badge">
+      <span>20%</span>
+      <span>Seasonal Offer</span>
+    </div>
+  </div>
+</section>
+
+<div class="sale-banner">✦ DISKON MUSIMAN HINGGA <strong>20%</strong> — KODE AKTIF: BEAUTY20 ✦</div>
+
+<div class="benefits-bar">
+  <div class="benefit">
+    <div class="benefit-icon-container">𐎓</div>
+    <div>
+      <div class="benefit-title">100% Organik</div>
+      <div class="benefit-sub">Bahan dasar alami pilihan murni tanpa kimia agresif.</div>
+    </div>
+  </div>
+  <div class="benefit">
+    <div class="benefit-icon-container">𐎓</div>
+    <div>
+      <div class="benefit-title">Kurasi Aman</div>
+      <div class="benefit-sub">Telah diuji klinis aman untuk segala jenis profil kulit.</div>
+    </div>
+  </div>
+  <div class="benefit">
+    <div class="benefit-icon-container">𐎓</div>
+    <div>
+      <div class="benefit-title">Bebas Ongkos</div>
+      <div class="benefit-sub">Pengiriman gratis merata dengan klaim kode kupon.</div>
+    </div>
+  </div>
+  <div class="benefit">
+    <div class="benefit-icon-container">𐎓</div>
+    <div>
+      <div class="benefit-title">Proteksi Penuh</div>
+      <div class="benefit-sub">Kebijakan garansi retur kepuasan produk 30 hari penuh.</div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="categories-section">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Koleksi Kurasi</p>
+      <h2 class="section-title">Telusuri Spektrum Kategori</h2>
+    </div>
+    <button class="view-all view-all-btn" onclick="resetSearchFilter()">Lihat Semua Koleksi →</button>
+  </div>
+  <div class="categories-grid">
+    <div class="cat-card" onclick="filterByCategory('Skincare')">
+      <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80" alt="Luxury Organic Skincare Category" onerror="handleImageError(this)">
+      <div class="cat-overlay">
+        <div class="cat-name">Skincare</div>
+        <div class="cat-count">4 Formulasi Aktif</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('Makeup')">
+      <img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=600&q=80" alt="Editorial Cosmetic Makeup Category" onerror="handleImageError(this)">
+      <div class="cat-overlay">
+        <div class="cat-name">Makeup</div>
+        <div class="cat-count">4 Formulasi Aktif</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('Lip Care')">
+      <img src="https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80" alt="Botanical Lip Treatment Category" onerror="handleImageError(this)">
+      <div class="cat-overlay">
+        <div class="cat-name">Lip Care</div>
+        <div class="cat-count">4 Formulasi Aktif</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="filterByCategory('Eye Care')">
+      <img src="https://images.unsplash.com/photo-1619451334792-150fd785ee74?w=600&q=80" alt="Advanced Eye Hydration Category" onerror="handleImageError(this)">
+      <div class="cat-overlay">
+        <div class="cat-name">Eye Care</div>
+        <div class="cat-count">4 Formulasi Aktif</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bestsellers-bg" id="shop">
+  <div class="section-header">
+    <div>
+      <p class="section-tag" id="product-section-tag">Katalog Utama</p>
+      <h2 class="section-title" id="product-section-title">Produk Unggulan Pilihan</h2>
+    </div>
+    <button class="view-all view-all-btn" onclick="resetSearchFilter()">Lihat Semua Produk →</button>
+  </div>
+  
+  <div class="products-grid" id="products-container">
+    </div>
+</section>
+
+<div class="about-strip" id="about-section">
+  <div class="about-visual">
+    <img src="https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=1000&q=80" alt="Fine Art Botanical Ingredients Visual" onerror="handleImageError(this)">
+  </div>
+  <div class="about-content">
+    <p class="section-tag">Filosofi Nuvea</p>
+    <h2 class="section-title">Worthy Work,<br>Beautiful Result.</h2>
+    <p>Kami percaya bahwa kemewahan esensial tidak berakar dari zat artifisial, melainkan dari presisi sains modern yang menyelaraskan molekul botani aktif paling organik. Diramu lambat dengan dedikasi tinggi demi hasil estetik yang seimbang dan aman jangka panjang.</p>
+    <div class="about-features">
+      <div class="about-feat">
+        <div class="about-feat-icon">𐎓</div>
+        <span>Sertifikasi Vegan & Bebas Eksploitasi Hewani</span>
+      </div>
+      <div class="about-feat">
+        <div class="about-feat-icon">𐎓</div>
+        <span>Diformulasikan oleh Dermatolog Lintas Negara</span>
+      </div>
+      <div class="about-feat">
+        <div class="about-feat-icon">𐎓</div>
+        <span>Kemasan Kaca Minimalis Ramah Ekosistem Bumi</span>
+      </div>
+    </div>
+    <button class="btn-primary" style="margin-top:44px; align-self:flex-start;" onclick="document.getElementById('categories-section').scrollIntoView({behavior:'smooth'})">Lihat Ragam Koleksi</button>
+  </div>
+</div>
+
+<section class="section" id="recommendations-section">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Rekomendasi Editor</p>
+      <h2 class="section-title">Gaya Musim Ini</h2>
+    </div>
+    <button class="view-all view-all-btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Kembali Ke Toko →</button>
+  </div>
+  <div class="featured-wide">
+    <div class="feat-main" onclick="filterByCategory('Makeup')">
+      <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?w=1000&q=80" alt="Summer Dewy Makeup Editorial Visual" onerror="handleImageError(this)">
+      <div class="feat-overlay">
+        <div class="feat-label">Kurasi Utama</div>
+        <div class="feat-title">Koleksi Riasan Minimalis<br>Glow Musim Panas</div>
+        <a class="feat-link">Jelajahi Seri</a>
+      </div>
+    </div>
+    <div class="feat-side">
+      <div class="feat-small" onclick="filterByCategory('Lip Care')">
+        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700&q=80" alt="Moisturizing Lip Plumper Set" onerror="handleImageError(this)">
+        <div class="feat-overlay">
+          <div class="feat-label">Sedang Tren</div>
+          <div class="feat-title">Lip Serum & Gloss<br>Treatment Collection</div>
+        </div>
+      </div>
+      <div class="feat-small" onclick="filterByCategory('Skincare')">
+        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=700&q=80" alt="Botanical Anti Aging Kit" onerror="handleImageError(this)">
+        <div class="feat-overlay">
+          <div class="feat-label">Terlaris</div>
+          <div class="feat-title">Skincare Essential<br>Starter Set</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tags-section" style="background: var(--white);" id="tags-container">
+  <span class="tag-label">Pencarian Teratas:</span>
+  <span class="tag" onclick="filterByTag('lip', this)">lip care</span>
+  <span class="tag" onclick="filterByTag('serum', this)">serum</span>
+  <span class="tag" onclick="filterByTag('toner', this)">toner</span>
+  <span class="tag" onclick="filterByTag('cream', this)">cream</span>
+  <span class="tag" onclick="filterByTag('foundation', this)">foundation</span>
+  <span class="tag" onclick="filterByTag('eye', this)">eye care</span>
+</div>
+
+<section class="section testimonials-bg" id="reviews-section">
+  <div class="section-header">
+    <div>
+      <p class="section-tag">Suara Konsumen</p>
+      <h2 class="section-title">Ulasan Terpilih</h2>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <p class="testi-text">Dalam hitungan minggu memakai Vitamin C Serum, warna kulit wajah berangsur merata, kenyal, dan lembap. Sangat sepadan dengan nilai kemurnian bahannya.</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80" alt="Customer Profile Portrait" class="testi-avatar" onerror="handleImageError(this)">
+        <div>
+          <div class="testi-name">Sari Kusuma</div>
+          <div class="testi-role">Pembeli Terverifikasi ✦✦✦✦✦</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <p class="testi-text">Foundation kit miliknya menyatu sempurna tanpa kesan tebal. Tetap terhidrasi dan nyaman dipakai bekerja di ruangan AC seharian penuh.</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1614644147798-f8c0fc9da7f6?w=100&q=80" alt="Customer Profile Portrait" class="testi-avatar" onerror="handleImageError(this)">
+        <div>
+          <div class="testi-name">Nadya Putri</div>
+          <div class="testi-role">Pembeli Terverifikasi ✦✦✦✦✦</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <p class="testi-text">Tekstur lip sleeping mask-nya sangat lembut, mengembalikan rona alami bibir pecah-pecah saya dengan cepat. Ini sudah botol pembelian ketiga saya.</p>
+      <div class="testi-author">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" alt="Customer Profile Portrait" class="testi-avatar" onerror="handleImageError(this)">
+        <div>
+          <div class="testi-name">Rini Anggraini</div>
+          <div class="testi-role">Pembeli Terverifikasi ✦✦✦✦𐎓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="newsletter" id="blog-newsletter">
+  <div class="newsletter-visual">
+    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80" alt="Editorial Skincare Aesthetics Texture" onerror="handleImageError(this)">
+  </div>
+  <div class="newsletter-content">
+    <p class="section-tag">Komunitas Nuvea</p>
+    <h2>Bergabung ke Mailing List</h2>
+    <p>Dapatkan berkas tips kecantikan, kurasi riset dermatologi bulanan, serta prioritas akses rilis terbatas produk baru langsung di kotak surat elektronik Anda.</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email-input" placeholder="Tulis alamat email Anda...">
+      <button onclick="subscribeNewsletter()">Daftar</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#home" class="nav-logo">NUVEA</a>
+      <p>Esensi kecantikan murni yang memadukan kemewahan minimalis, sains tepercaya, dan rasa hormat penuh bagi ekosistem alam.</p>
+      <div class="footer-social">
+        <a href="https://facebook.com" target="_blank" class="social-btn">f</a>
+        <a href="https://instagram.com" target="_blank" class="social-btn">ig</a>
+        <a href="https://youtube.com" target="_blank" class="social-btn">yt</a>
+        <a href="https://tiktok.com" target="_blank" class="social-btn">tk</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Perusahaan</h4>
+      <ul>
+        <li><a href="#about-section">Tentang Kami</a></li>
+        <li><a href="#about-section">Kisah Formulasi</a></li>
+        <li><a href="#blog-newsletter">Karier Internal</a></li>
+        <li><a href="#blog-newsletter">Hubungan Media</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Bantuan Layanan</h4>
+      <ul>
+        <li><a href="#home">Pertanyaan Umum</a></li>
+        <li><a href="#home">Informasi Kargo</a></li>
+        <li><a href="#home">Ketentuan Retur</a></li>
+        <li><a href="#blog-newsletter">Kontak Customer Care</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kategori Utama</h4>
+      <ul>
+        <li><a onclick="filterByCategory('Skincare')">Skincare Base</a></li>
+        <li><a onclick="filterByCategory('Makeup')">Editorial Makeup</a></li>
+        <li><a onclick="filterByCategory('Lip Care')">Luxury Lip Care</a></li>
+        <li><a onclick="filterByCategory('Eye Care')">Advanced Eye Treatment</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 NUVEA Beauty. Hak Cipta Dilindungi.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal">
+    <button class="modal-close" id="modal-close-btn">✕</button>
+    
+    <div class="modal-left">
+      <h2>Your Cart</h2>
+      <div class="cart-container" id="cart-items-wrapper"></div>
+      <div class="modal-total">
+        <span>Total Akhir</span>
+        <span id="cart-total-price">Rp 0</span>
+      </div>
+    </div>
+    
+    <div class="modal-right">
+      <h2 style="margin-top: 10px;">Checkout</h2>
+      <form id="checkout-form" onsubmit="processCheckout(event)">
+        <div class="form-group">
+          <label class="form-label">Nama Penerima Paket</label>
+          <input class="form-input" type="text" id="cust-name" required placeholder="Tulis nama lengkap">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Alamat Surat Elektronik (Email)</label>
+          <input class="form-input" type="email" id="cust-email" required placeholder="nama@domain.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Destinasi Alamat Pengiriman</label>
+          <input class="form-input" type="text" id="cust-address" required placeholder="Jalan, Nomor Rumah, Kota, Provinsi">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Kode Voucher / Promo</label>
+          <input class="form-input" type="text" id="promo-code" placeholder="BEAUTY20">
+        </div>
+        <button type="submit" class="checkout-btn">Proses Pengiriman Sekarang →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 1. Array Objek Data Produk Utama - Terdiri atas 16 baris komparasi seimbang
+  const productsData = [
+    // === SKINCARE ==
+    { id: 1, name: "Vitamin C Brightening Serum", price: 185000, img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&q=80", cat: "Skincare", sale: "–20%", originalPrice: 231000 },
+    { id: 2, name: "Rose Gold Moisturizer Cream", price: 210000, img: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=500&q=80", cat: "Skincare" },
+    { id: 3, name: "Tone Up Brightening Toner", price: 115000, img: "https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?w=500&q=80", cat: "Skincare", sale: "–25%", originalPrice: 153000 },
+    { id: 4, name: "Deep Cleansing Foam Gel", price: 95000, img: "https://images.unsplash.com/photo-1556229174-5e42a09e45af?w=500&q=80", cat: "Skincare", soldOut: true },
+
+    // === MAKEUP ===
+    { id: 5, name: "Dewy Skin Foundation Kit", price: 249000, img: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=500&q=80", cat: "Makeup", soldOut: true },
+    { id: 6, name: "Flawless Setting Powder", price: 145000, img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&q=80", cat: "Makeup", sale: "–10%", originalPrice: 161000 },
+    { id: 7, name: "Velvet Matte Liquid Blush", price: 125000, img: "https://images.unsplash.com/photo-1631730359575-38e4755d772b?w=500&q=80", cat: "Makeup" },
+    { id: 8, name: "Satin Finish Glow Highlighter", price: 175000, img: "https://images.unsplash.com/photo-1515688594390-b649af70d282?w=500&q=80", cat: "Makeup" },
+
+    // === LIP CARE ===
+    { id: 9, name: "Lip Plumping Serum Oriental", price: 135000, img: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=500&q=80", cat: "Lip Care", sale: "–15%", originalPrice: 159000 },
+    { id: 10, name: "Luxury Lip Sleeping Mask", price: 110000, img: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&q=80", cat: "Lip Care" },
+    { id: 11, name: "Tinted Lip Oil Rosewood", price: 128000, img: "https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=500&q=80", cat: "Lip Care", soldOut: true },
+    { id: 12, name: "Hydrating Lip Balm Coconut", price: 75000, img: "https://images.unsplash.com/photo-1617421734995-bb0ffbfde105?w=500&q=80", cat: "Lip Care" },
+
+    // === EYE CARE ===
+    { id: 13, name: "Retinol Eye Repair Cream", price: 198000, img: "https://images.unsplash.com/photo-1600612253971-f39f2e44ec11?w=500&q=80", cat: "Eye Care" },
+    { id: 14, name: "Anti-Aging Caffeine Eye Serum", price: 185000, img: "https://images.unsplash.com/photo-1620916726824-c10444053956?w=500&q=80", cat: "Eye Care", sale: "–20%", originalPrice: 231000 },
+    { id: 15, name: "Hydrogel Cooling Eye Patches", price: 140000, img: "https://images.unsplash.com/photo-1619451334792-150fd785ee74?w=500&q=80", cat: "Eye Care" },
+    { id: 16, name: "Defending Lash & Brow Gel", price: 115000, img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&q=80", cat: "Eye Care", soldOut: true }
+  ];
+
+  let cart = [];
+  let favorites = [];
+
+  // Core Global Elements Selectors
+  const modalOverlay = document.getElementById('checkout-modal');
+  const cartCountBadge = document.getElementById('cart-count');
+  const favCountBadge = document.getElementById('fav-count');
+  const cartItemsWrapper = document.getElementById('cart-items-wrapper');
+  const cartTotalPriceDisplay = document.getElementById('cart-total-price');
+  const searchBox = document.getElementById('search-box');
+  const searchInputField = document.getElementById('search-input-field');
+  const productsContainer = document.getElementById('products-container');
+
+  // Membuka katalog penuh di load awal sistem halaman
+  window.addEventListener('DOMContentLoaded', () => {
+    displayProducts(productsData);
+  });
+
+  // Fungsi Fallback Otomatis untuk Mengganti Link Unsplash yang Rusak/Lama diakses
+  function handleImageError(imgElement) {
+    imgElement.onerror = null; // Mencegah looping rekursif eror berkelanjutan
+    // Menghasilkan placeholder data SVG minimalis dengan skema warna estetik Nuvea
+    imgElement.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e5d4c0'/><circle cx='50' cy='50' r='20' fill='%23bd845b' opacity='0.4'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='5' fill='%232d1f16' opacity='0.6'>NUVEA LUXE</text></svg>";
+  }
+
+  // Engine Render Komponen DOM Grid Katalog Utama
+  function displayProducts(productsList) {
+    if(productsList.length === 0) {
+      productsContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-light); font-style: italic; padding: 60px 0; font-size: 14px; font-weight: 300;">Maaf, tidak ada produk aktif dengan saringan ini.</div>`;
+      return;
+    }
+
+    productsContainer.innerHTML = productsList.map(prod => {
+      const isFav = favorites.includes(prod.id) ? 'active' : '';
+      let badgeHtml = '';
+      let actionBtnHtml = `<div class="product-quick" onclick="addToCart(${prod.id})">+ Tambah Ke Keranjang</div>`;
+      
+      if (prod.soldOut) {
+        badgeHtml = `<div class="badge-sold">Sold Out</div>`;
+        actionBtnHtml = `<div class="product-quick" style="background: rgba(38,28,20,0.5); cursor: not-allowed; opacity: 1; transform: none;">Stok Habis</div>`;
+      } else if (prod.sale) {
+        badgeHtml = `<div class="badge-sale">${prod.sale}</div>`;
+      }
+
+      const priceWasHtml = prod.originalPrice ? `<span class="price-was">${formatIDR(prod.originalPrice)}</span>` : '';
+
+      return `
+        <div class="product-card" data-id="${prod.id}">
+          <div class="product-img">
+            <img src="${prod.img}" alt="${prod.name} Product View" onerror="handleImageError(this)">
+            ${badgeHtml}
+            <button class="btn-fav-item ${isFav}" onclick="toggleFavorite(${prod.id}, event)" title="Suka">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </button>
+            ${actionBtnHtml}
+          </div>
+          <div class="product-info">
+            <div class="product-stars">★★★★★</div>
+            <div class="product-brand">Nuvea Luxury</div>
+            <div class="product-name">${prod.name}</div>
+            <div class="product-price">
+              <span class="price-now">${formatIDR(prod.price)}</span>
+              ${priceWasHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // 2. Kontrol Manajemen Modal View
+  const openCartModal = () => {
+    renderCart();
+    modalOverlay.classList.add('open');
+  };
+  const closeCartModal = () => modalOverlay.classList.remove('open');
+
+  document.getElementById('cart-trigger').addEventListener('click', openCartModal);
+  document.getElementById('checkout-nav-btn').addEventListener('click', openCartModal);
+  document.getElementById('modal-close-btn').addEventListener('click', closeCartModal);
+  modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeCartModal(); });
+
+  // 3. Logika Keranjang Belanja & Penghitung Unit (Cart Management)
+  function addToCart(productId) {
+    const targetProduct = productsData.find(p => p.id === productId);
+    if (targetProduct.soldOut) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+      existingItem.qty += 1;
+    } else {
+      cart.push({ ...targetProduct, qty: 1 });
+    }
+    
+    updateCounters();
+    alert(`🌸 ${targetProduct.name} telah masuk ke tas belanja Anda.`);
+  }
+
+  function removeCartItem(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCounters();
+    renderCart();
+  }
+
+  function updateCounters() {
+    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    cartCountBadge.textContent = totalQty;
+    
+    const cartIcon = document.querySelector('#cart-trigger svg');
+    if(totalQty > 0) cartIcon.classList.add('has-items');
+    else cartIcon.classList.remove('has-items');
+
+    favCountBadge.textContent = favorites.length;
+    favCountBadge.style.display = favorites.length > 0 ? 'flex' : 'none';
+  }
+
+  function formatIDR(number) {
+    return 'Rp ' + number.toLocaleString('id-ID');
+  }
+
+  function renderCart() {
+    if (cart.length === 0) {
+      cartItemsWrapper.innerHTML = `<div class="cart-empty-msg">Tas belanja Anda kosong.</div>`;
+      cartTotalPriceDisplay.textContent = formatIDR(0);
+      return;
+    }
+
+    let itemsHtml = '';
+    let subtotal = 0;
+
+    cart.forEach(item => {
+      const itemCost = item.price * item.qty;
+      subtotal += itemCost;
+      itemsHtml += `
+        <div class="cart-item">
+          <img src="${item.img}" alt="${item.name}" onerror="handleImageError(this)">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${formatIDR(item.price)} × ${item.qty}</div>
+          </div>
+          <button class="btn-remove-item" onclick="removeCartItem(${item.id})">✕</button>
+        </div>
+      `;
+    });
+
+    cartItemsWrapper.innerHTML = itemsHtml;
+    cartTotalPriceDisplay.textContent = formatIDR(subtotal);
+  }
+
+  // 4. Sistem Mesin Saring Pengetikan Pencarian (Real-Time Search Box)
+  document.getElementById('search-trigger').addEventListener('click', () => {
+    searchBox.classList.toggle('open');
+    if(searchBox.classList.contains('open')) searchInputField.focus();
+  });
+
+  document.getElementById('search-close').addEventListener('click', () => {
+    searchBox.classList.remove('open');
+    resetSearchFilter();
+  });
+
+  searchInputField.addEventListener('input', (e) => {
+    const keyword = e.target.value.toLowerCase().trim();
+    if(keyword !== "") {
+      const filtered = productsData.filter(prod => 
+        prod.name.toLowerCase().includes(keyword) || 
+        prod.cat.toLowerCase().includes(keyword)
+      );
+      displayProducts(filtered);
+      document.getElementById('product-section-title').innerHTML = `Hasil Penelusuran: "${keyword}" (${filtered.length})`;
+      document.getElementById('shop').scrollIntoView({behavior:'auto'});
+    } else {
+      resetSearchFilter();
+    }
+  });
+
+  // 5. Logika Navigasi Filter Kategori & Pengatur Komponen Tag
+  function filterByCategory(categoryName) {
+    searchInputField.value = '';
+    const filtered = productsData.filter(prod => prod.cat === categoryName);
+    displayProducts(filtered);
+
+    document.getElementById('product-section-tag').textContent = "Koleksi Terarah";
+    document.getElementById('product-section-title').innerHTML = `Seri ${categoryName} (${filtered.length})`;
+    document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  }
+
+  function filterByTag(tagName, element) {
+    document.querySelectorAll('#tags-container .tag').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+    
+    const filtered = productsData.filter(prod => 
+      prod.name.toLowerCase().includes(tagName) || 
+      prod.cat.toLowerCase().includes(tagName)
+    );
+    displayProducts(filtered);
+    document.getElementById('product-section-title').innerHTML = `Saringan Tag: "${tagName}" (${filtered.length})`;
+    document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  }
+
+  function resetSearchFilter() {
+    displayProducts(productsData);
+    document.querySelectorAll('#tags-container .tag').forEach(t => t.classList.remove('active'));
+    document.getElementById('product-section-tag').textContent = "Katalog Utama";
+    document.getElementById('product-section-title').innerHTML = "Produk Unggulan Pilihan";
+    searchInputField.value = '';
+    document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  }
+
+  // 6. Saringan Manajemen Suka (Wishlist System)
+  function toggleFavorite(id, event) {
+    event.stopPropagation();
+    const btn = event.currentTarget;
+    
+    if (favorites.includes(id)) {
+      favorites = favorites.filter(favId => favId !== id);
+      btn.classList.remove('active');
+    } else {
+      favorites.push(id);
+      btn.classList.add('active');
+    }
+    updateCounters();
+  }
+
+  document.getElementById('fav-trigger').addEventListener('click', () => {
+    if(favorites.length === 0) {
+      alert("Daftar keinginan Anda masih kosong. Tekan tanda hati pada produk katalog.");
+      resetSearchFilter();
+      return;
+    }
+    
+    const filtered = productsData.filter(prod => favorites.includes(prod.id));
+    displayProducts(filtered);
+
+    document.getElementById('product-section-tag').textContent = "Preferensi Personal";
+    document.getElementById('product-section-title').innerHTML = `Daftar Keinginan Saya (${filtered.length})`;
+    document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  });
+
+  // 7. Proses Manajemen Form Ekspedisi & Subscribe Newsletter
+  function processCheckout(event) {
+    event.preventDefault();
+    if(cart.length === 0) {
+      alert("Gagal memproses. Tas belanja Anda kosong!");
+      return;
+    }
+
+    const name = document.getElementById('cust-name').value;
+    const email = document.getElementById('cust-email').value;
+    const address = document.getElementById('cust-address').value;
+    const code = document.getElementById('promo-code').value;
+
+    let successMessage = `Terima kasih, ${name}.\nPesanan Anda berhasil diamankan dan sedang masuk antrean kurasi.\n\nLembar invoice pengiriman dikirim otomatis menuju email: ${email}.\nTujuan Pengiriman: ${address}`;
+    if (code.toUpperCase() === 'BEAUTY20') {
+      successMessage += `\n\n🎁 Kupon BEAUTY20 Aktif: Potongan musiman 20% berhasil dipotong dari subtotal.`;
+    }
+
+    alert(successMessage);
+    
+    // Pembersihan State Belanja Pasca Transaksi Sukses
+    cart = [];
+    document.getElementById('checkout-form').reset();
+    updateCounters();
+    closeCartModal();
+  }
+
+  function subscribeNewsletter() {
+    const emailInput = document.getElementById('newsletter-email-input');
+    if (emailInput.value.trim() === "" || !emailInput.value.includes('@')) {
+      alert("Harap tuliskan format struktur alamat email yang absah.");
+      return;
+    }
+    alert(`✦ Sukses Terkoneksi. Alamat email (${emailInput.value}) kini berstatus langganan info premium berkala NUVEA.`);
+    emailInput.value = '';
+  }
+</script>
+
+</body>
+</html>
